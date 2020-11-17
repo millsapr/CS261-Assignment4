@@ -271,7 +271,8 @@ class BST:
                 parentSuccessor.left = successor.right
                 successor.right = target.right
                 successor.left = target.left
-                parent.right = successor
+                parent.left = successor
+                print("parent.left is " + str(parent.left.value))
             elif parent is not None and parent.left is not None and parent.left.value == target.value:
                 print("target is a left child")
                 parent.left = successor
@@ -449,6 +450,13 @@ if __name__ == '__main__':
     print(tree.remove(0))
     print(tree)
     print(tree.remove(2))
+    print(tree)
+
+    """ remove() example 5 (gradescope) """
+    print("\nPDF - method remove() example 5")
+    print("-------------------------------")
+    tree = BST([5, -4, -9, -9, -1, -3])
+    print(tree.remove(-4))
     print(tree)
 
     # """ remove_first() example 1 """
