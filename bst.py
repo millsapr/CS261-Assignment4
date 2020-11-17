@@ -272,7 +272,7 @@ class BST:
                 successor.right = target.right
                 successor.left = target.left
                 parent.right = successor
-            elif parent is not None and parent.left.value == target.value:
+            elif parent is not None and parent.left is not None and parent.left.value == target.value:
                 print("target is a left child")
                 parent.left = successor
             else:
@@ -447,6 +447,8 @@ if __name__ == '__main__':
     print("-------------------------------")
     tree = BST([0, 1, 2, 2, 3, 3, 3])
     print(tree.remove(0))
+    print(tree)
+    print(tree.remove(2))
     print(tree)
 
     # """ remove_first() example 1 """
