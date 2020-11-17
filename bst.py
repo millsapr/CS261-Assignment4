@@ -224,7 +224,7 @@ class BST:
             return False
 
         cur = self.root
-        parent = self.root          # to fix GS test 'parent' ref'd before assignment
+        parent = None         # to fix GS test 'parent' ref'd before assignment
         while cur is not None:
             if cur.value == value:
                 target = cur
@@ -272,14 +272,17 @@ class BST:
                 successor.right = target.right
                 successor.left = target.left
                 parent.right = successor
-            elif parent.left is not None and parent.left.value == target.value:
+            elif parent is not None and parent.left.value == target.value:
                 print("target is a left child")
                 parent.left = successor
             else:
                 print("target is a right child")
-                print("parent.right before reassign is " + str(parent.right))
-                parent.right = successor
-                print("parent.right after reassign is " + str(parent.right))
+                # print("parent.right before reassign is " + str(parent.right))
+                if parent is not None:
+                    parent.right = successor
+                else:
+                    self.root = successor
+                # print("parent.right after reassign is " + str(parent.right))
         target.left = None
         target.right = None
         # find successor (ios)
