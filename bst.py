@@ -251,6 +251,7 @@ class BST:
             print("no target right child so parent right is " + str(parent.right))
         else:                                   # find IOS and PS
             successor = target.right
+            parentSuccessor = successor
             print("succ target.right is " + str(successor))
             nRight = 1
             while successor.left is not None:
