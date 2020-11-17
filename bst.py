@@ -223,6 +223,7 @@ class BST:
             return False
 
         cur = self.root
+        parent = self.root          # to fix GS test 'parent' ref'd before assignment
         while cur is not None:
             if cur.value == value:
                 target = cur
