@@ -190,6 +190,7 @@ class BST:
             self.root = self.root.left
         else:
             successor = self.root.right
+            parentSuccessor = successor
             nRight = 1                                     # IF S IS NOT N.RIGHT?
             while successor.left is not None:
                 parentSuccessor = successor
@@ -237,10 +238,11 @@ class BST:
         print("target is " + str(target))
         print("parent is " + str(parent))
 
+        # print("parent.left.value = " + str(parent.left.value))
         # if N has no children point PN to None
         if target.left is None and target.right is None:
             print("no children")
-            if parent.left.value == target.value:
+            if parent.left is not None and parent.left.value == target.value:
                 print("target is a left child")
                 parent.left = None
             else:
@@ -250,6 +252,7 @@ class BST:
             parent.right = target.left
             print("no target right child so parent right is " + str(parent.right))
         else:                                   # find IOS and PS
+            # print("parent.left.value = " + str(parent.left.value))
             successor = target.right
             parentSuccessor = successor
             print("succ target.right is " + str(successor))
@@ -269,7 +272,7 @@ class BST:
                 successor.right = target.right
                 successor.left = target.left
                 parent.right = successor
-            elif parent.left.value == target.value:
+            elif parent.left is not None and parent.left.value == target.value:
                 print("target is a left child")
                 parent.left = successor
             else:
@@ -435,6 +438,13 @@ if __name__ == '__main__':
     # print(tree.in_order_traversal())
     # print(tree.post_order_traversal())
     # print(tree.by_level_traversal())
+
+    """ remove() example 4 (gradescope) """
+    print("\nPDF - method remove() example 4")
+    print("-------------------------------")
+    tree = BST([0, 1, 2, 2, 3, 3, 3])
+    print(tree.remove(0))
+    print(tree)
 
     # """ remove_first() example 1 """
     # print("\nPDF - method remove_first() example 1")
