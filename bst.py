@@ -249,8 +249,16 @@ class BST:
                 print("target is a right child")
                 parent.right = None
         elif target.right is None:
-            parent.right = target.left
+            print("parent.right is " + str(parent.right))
+            print("parent.left is " + str(parent.left))
+            # parent.right = target.left
             print("no target right child so parent right is " + str(parent.right))
+            if parent.left is not None and parent.left.value == target.value:
+                print("target is a left child")
+                parent.left = target.left
+            else:
+                print("target is a right child")
+                parent.right = target.left
         else:                                   # find IOS and PS
             # print("parent.left.value = " + str(parent.left.value))
             successor = target.right
@@ -457,6 +465,13 @@ if __name__ == '__main__':
     print("-------------------------------")
     tree = BST([5, -4, -9, -9, -1, -3])
     print(tree.remove(-4))
+    print(tree)
+
+    """ remove() example 6 (gradescope) """
+    print("\nPDF - method remove() example 6")
+    print("-------------------------------")
+    tree = BST(['TG', 'D', 'I', 'W', 'V', 'TG', 'WY'])
+    print(tree.remove("V"))
     print(tree)
 
     # """ remove_first() example 1 """
