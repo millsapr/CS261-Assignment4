@@ -399,9 +399,6 @@ class BST:
         returns the height of the binary tree. Empty tree has a height of -1. Tree consisting of
         just a single root node returns a height of 0
         """
-        # run down every possible path keeping count, then take the max
-        # run down first path, then second, compare, keep max of two, then run next
-
         return self.height_helper(self.root)
 
     def height_helper(self, cur):
@@ -417,7 +414,30 @@ class BST:
         """
         returns the number of nodes in the tree that have no children. If the tree is empty, returns 0
         """
-        return 0
+        q = Queue()
+        count = 0
+        self.count_leaves_helper(self.root, q)
+
+        while q.is_empty() is False:
+            cur = q.dequeue()
+            if cur.left is None and cur.right is None:
+                count += 1
+
+        return count
+
+    def count_leaves_helper(self, cur, q):
+        """
+        helper method for count_leaves
+        """
+        if cur is None:
+            return
+
+        # enqueue current node
+        q.enqueue(cur)
+        # recursive case for left subtree
+        self.count_leaves_helper(cur.left, q)
+        # recursive case for right subtree
+        self.count_leaves_helper(cur.right, q)
 
     def count_unique(self) -> int:
         """
