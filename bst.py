@@ -361,19 +361,23 @@ class BST:
 
     def is_full(self) -> bool:
         """
-        TODO: Write this implementation
+        returns True if the current tree is a ‘full binary tree’. Empty tree is
+        considered ‘full’. Tree consisting of a single root node is ‘full’
         """
+
         return True
 
     def is_complete(self) -> bool:
         """
-        TODO: Write this implementation
+        returns True if the current tree is a ‘complete binary tree’. Empty tree is
+        considered complete. Tree consisting of a single root node is complete.
         """
         return True
 
     def is_perfect(self) -> bool:
         """
-        TODO: Write this implementation
+        returns True if the current tree is a ‘perfect binary tree’. Empty tree is
+        considered ‘perfect’. Tree consisting of a single root node is ‘perfect
         """
         return True
 
@@ -397,7 +401,17 @@ class BST:
         """
         # run down every possible path keeping count, then take the max
         # run down first path, then second, compare, keep max of two, then run next
-        return -1
+
+        return self.height_helper(self.root)
+
+    def height_helper(self, cur):
+
+        if cur is None:
+            return -1
+        else:
+            left_height = self.height_helper(cur.left)
+            right_height = self.height_helper(cur.right)
+            return max(left_height + 1, right_height + 1)
 
     def count_leaves(self) -> int:
         """
@@ -407,7 +421,7 @@ class BST:
 
     def count_unique(self) -> int:
         """
-        TODO: Write this implementation
+        returns the count of unique values stored in the tree.
         """
         return 0
 
