@@ -364,8 +364,29 @@ class BST:
         returns True if the current tree is a ‘full binary tree’. Empty tree is
         considered ‘full’. Tree consisting of a single root node is ‘full’
         """
+        q = Queue()
+        self.is_full_helper(self.root, q)
+
+        while q.is_empty() is False:
+            cur = q.dequeue()
+            if (cur.left is None and cur.right is not None) or (cur.left is not None and cur.right is None):
+                return False
 
         return True
+
+    def is_full_helper(self, cur, q):
+        """
+        helper method for is_full
+        """
+        if cur is None:
+            return
+
+        # enqueue current node
+        q.enqueue(cur)
+        # recursive case for left subtree
+        self.is_full_helper(cur.left, q)
+        # recursive case for right subtree
+        self.is_full_helper(cur.right, q)
 
     def is_complete(self) -> bool:
         """
