@@ -218,6 +218,10 @@ class BST:
         if self.root is None:                               # if tree is empty, return False
             return False
 
+        if self.root.value == value:
+            self.remove_first()
+            return True
+
         cur = self.root                                       # find N by starting at root
         PN = None                                             # parent of N
         childleft = None
@@ -225,11 +229,12 @@ class BST:
         while cur is not None:                              # find N
             if cur.value == value:
                 N = cur
-                if childleft is None:                     # childleft = None means we're still at root
-                    self.remove_first()
-                    return True
-                else:
-                    break
+                break
+                # if childleft is None:                     # childleft = None means we're still at root
+                #     self.remove_first()
+                #     return True
+                # else:
+                #     break
             elif value < cur.value:
                 cur = cur.left
                 PN = cur
@@ -263,9 +268,10 @@ class BST:
                 PS.left = S.right                       # S’s right child (which might be None) becomes PS’s left child
                 S.right = N.right
 
-            if childleft == 1:
+            if childleft != 0:
                 PN.left = S
             else:
+
                 PN.right = S
 
         N.left = None
