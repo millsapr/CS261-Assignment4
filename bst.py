@@ -224,7 +224,7 @@ class BST:
 
         cur = self.root                                       # find N by starting at root
         PN = None                                             # parent of N
-        childleft = None
+        # childleft = None
 
         while cur is not None:                              # find N
             if cur.value == value:
@@ -236,12 +236,12 @@ class BST:
                 # else:
                 #     break
             elif value < cur.value:
-                cur = cur.left
                 PN = cur
+                cur = cur.left
                 childleft = 1
             else:
-                cur = cur.right
                 PN = cur
+                cur = cur.right
                 childleft = 0
 
         if N.left is None and N.right is None:
@@ -271,7 +271,6 @@ class BST:
             if childleft != 0:
                 PN.left = S
             else:
-
                 PN.right = S
 
         N.left = None
@@ -431,6 +430,29 @@ if __name__ == '__main__':
     # print(tree.in_order_traversal())
     # print(tree.post_order_traversal())
     # print(tree.by_level_traversal())
+
+    """ remove() example 4 (gradescope) """
+    print("\nPDF - method remove() example 4")
+    print("-------------------------------")
+    tree = BST([0, 1, 2, 2, 3, 3, 3])
+    print(tree.remove(0))
+    print(tree)
+    print(tree.remove(2))
+    print(tree)
+
+    """ remove() example 5 (gradescope) """
+    print("\nPDF - method remove() example 5")
+    print("-------------------------------")
+    tree = BST([5, -4, -9, -9, -1, -3])
+    print(tree.remove(-4))
+    print(tree)
+
+    """ remove() example 6 (gradescope) """
+    print("\nPDF - method remove() example 6")
+    print("-------------------------------")
+    tree = BST(['TG', 'D', 'I', 'W', 'V', 'TG', 'WY'])
+    print(tree.remove("V"))
+    print(tree)
 
     """ remove_first() example 1 """
     print("\nPDF - method remove_first() example 1")
