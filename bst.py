@@ -348,36 +348,16 @@ class BST:
         in the order they were visited
         """
         q = Queue()
+        visited = Queue()
         q.enqueue(self.root)
-        self.by_level_traversal_helper(self.root, q)
-        return q
-
-    def by_level_traversal_helper(self, cur, q) -> Queue:
-        """
-        helper method for by_level_traversal
-        """
-        if cur is None:
-            return
 
         while q.is_empty() is False:
-            print("dequeu(q) is " + str(q.dequeue()))
             cur = q.dequeue()
             if cur is not None:
-                # enqueue value of current node
-                q.enqueue(str(cur.value))
-                # recursive case for left subtree
-                self.by_level_traversal_helper(cur.left, q)
-                # recursive case for right subtree
-                self.by_level_traversal_helper(cur.right, q)
-
-        # q ← new, empty queue
-        # enqueue(q, bst.root)
-        # while q is not empty:
-        #     N ← dequeue(q)
-        #     if N is not NULL:
-        #         process N
-        #         enqueue(q, N.left)
-        #         enqueue(q, N.right)
+                visited.enqueue(cur.value)
+                q.enqueue(cur.left)
+                q.enqueue(cur.right)
+        return visited
 
     def is_full(self) -> bool:
         """
