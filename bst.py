@@ -423,7 +423,17 @@ class BST:
         """
         returns the count of unique values stored in the tree.
         """
-        return 0
+        q = self.in_order_traversal()
+        prev = None
+        count = 0
+
+        while q.is_empty() is False:
+            cur = q.dequeue()
+            if cur != prev:
+                count += 1
+            prev = cur
+
+        return count
 
 
 
