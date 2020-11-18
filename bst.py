@@ -275,27 +275,109 @@ class BST:
 
     def pre_order_traversal(self) -> Queue:
         """
-        TODO: Write this implementation
+        performs a pre-order traversal and returns a Queue object that contains values of the visited nodes,
+        in the order they were visited
         """
-        return Queue()
+        q = Queue()
+        self.pre_order_traversal_helper(self.root, q)
+        return q
+
+    def pre_order_traversal_helper(self, cur, q) -> Queue:
+        """
+        helper method for pre_order_traversal
+        """
+        if cur is None:
+            return
+
+        # enqueue value of current node
+        q.enqueue(str(cur.value))
+        # recursive case for left subtree
+        self.pre_order_traversal_helper(cur.left, q)
+        # recursive case for right subtree
+        self.pre_order_traversal_helper(cur.right, q)
 
     def in_order_traversal(self) -> Queue:
         """
-        TODO: Write this implementation
+        performs an in-order traversal and returns a Queue object that contains values of the visited nodes,
+        in the order they were visited
         """
-        return Queue()
+        q = Queue()
+        self.in_order_traversal_helper(self.root, q)
+        return q
+
+    def in_order_traversal_helper(self, cur, q) -> Queue:
+        """
+        helper method for in_order_traversal
+        """
+        if cur is None:
+            return
+        # recursive case for left subtree
+        self.in_order_traversal_helper(cur.left, q)
+        # enqueue value of current node
+        q.enqueue(str(cur.value))
+        # recursive case for right subtree
+        self.in_order_traversal_helper(cur.right, q)
+
 
     def post_order_traversal(self) -> Queue:
         """
-        TODO: Write this implementation
+        performs a post-order traversal and returns a Queue object that contains values of the visited nodes,
+        in the order they were visited
         """
-        return Queue()
+        q = Queue()
+        self.post_order_traversal_helper(self.root, q)
+        return q
+
+    def post_order_traversal_helper(self, cur, q) -> Queue:
+        """
+        helper method for post_order_traversal
+        """
+        if cur is None:
+            return
+
+        # recursive case for left subtree
+        self.post_order_traversal_helper(cur.left, q)
+        # recursive case for right subtree
+        self.post_order_traversal_helper(cur.right, q)
+        # enqueue value of current node
+        q.enqueue(str(cur.value))
 
     def by_level_traversal(self) -> Queue:
         """
-        TODO: Write this implementation
+        performs a by-level traversal and returns a Queue object that contains values of the visited nodes,
+        in the order they were visited
         """
-        return Queue()
+        q = Queue()
+        q.enqueue(self.root)
+        self.by_level_traversal_helper(self.root, q)
+        return q
+
+    def by_level_traversal_helper(self, cur, q) -> Queue:
+        """
+        helper method for by_level_traversal
+        """
+        if cur is None:
+            return
+
+        while q.is_empty() is False:
+            print("dequeu(q) is " + str(q.dequeue()))
+            cur = q.dequeue()
+            if cur is not None:
+                # enqueue value of current node
+                q.enqueue(str(cur.value))
+                # recursive case for left subtree
+                self.by_level_traversal_helper(cur.left, q)
+                # recursive case for right subtree
+                self.by_level_traversal_helper(cur.right, q)
+
+        # q ← new, empty queue
+        # enqueue(q, bst.root)
+        # while q is not empty:
+        #     N ← dequeue(q)
+        #     if N is not NULL:
+        #         process N
+        #         enqueue(q, N.left)
+        #         enqueue(q, N.right)
 
     def is_full(self) -> bool:
         """
@@ -398,20 +480,20 @@ if __name__ == '__main__':
     # print(tree.get_first())
     # print(tree)
 
-    """ remove() example 1 """
-    print("\nPDF - method remove() example 1")
-    print("-------------------------------")
-    tree = BST([10, 5, 15])
-    print(tree.remove(7))
-    print(tree.remove(15))
-    print(tree.remove(15))
-
-    """ remove() example 2 """
-    print("\nPDF - method remove() example 2")
-    print("-------------------------------")
-    tree = BST([10, 20, 5, 15, 17, 7, 12])
-    print(tree.remove(20))
-    print(tree)
+    # """ remove() example 1 """
+    # print("\nPDF - method remove() example 1")
+    # print("-------------------------------")
+    # tree = BST([10, 5, 15])
+    # print(tree.remove(7))
+    # print(tree.remove(15))
+    # print(tree.remove(15))
+    #
+    # """ remove() example 2 """
+    # print("\nPDF - method remove() example 2")
+    # print("-------------------------------")
+    # tree = BST([10, 20, 5, 15, 17, 7, 12])
+    # print(tree.remove(20))
+    # print(tree)
 
     """ remove() example 3 """
     print("\nPDF - method remove() example 3")
@@ -421,76 +503,76 @@ if __name__ == '__main__':
     print(tree)
     # comment out the following lines
     # if you have not yet implemented traversal methods
-    # print(tree.pre_order_traversal())
-    # print(tree.in_order_traversal())
-    # print(tree.post_order_traversal())
-    # print(tree.by_level_traversal())
+    print(tree.pre_order_traversal())
+    print(tree.in_order_traversal())
+    print(tree.post_order_traversal())
+    print(tree.by_level_traversal())
 
-    """ remove() example 4 (gradescope) """
-    print("\nPDF - method remove() example 4")
-    print("-------------------------------")
-    tree = BST([0, 1, 2, 2, 3, 3, 3])
-    print(tree.remove(0))
-    print(tree)
-    print(tree.remove(2))
-    print(tree)
-
-    """ remove() example 5 (gradescope) """
-    print("\nPDF - method remove() example 5")
-    print("-------------------------------")
-    tree = BST([5, -4, -9, -9, -1, -3])
-    print(tree.remove(-4))
-    print(tree)
-
-    """ remove() example 6 (gradescope) """
-    print("\nPDF - method remove() example 6")
-    print("-------------------------------")
-    tree = BST(['TG', 'D', 'I', 'W', 'V', 'TG', 'WY'])
-    print(tree.remove("V"))
-    print(tree)
-
-    """ remove_first() example 1 """
-    print("\nPDF - method remove_first() example 1")
-    print("-------------------------------------")
-    tree = BST([10, 15, 5])
-    print(tree.remove_first())
-    print(tree)
-
-    """ remove_first() example 2 """
-    print("\nPDF - method remove_first() example 2")
-    print("-------------------------------------")
-    tree = BST([10, 20, 5, 15, 17, 7])
-    print(tree.remove_first())
-    print(tree)
-
-    """ remove_first() example 3 """
-    print("\nPDF - method remove_first() example 3")
-    print("-------------------------------------")
-    tree = BST([10, 10, -1, 5, -1])
-    print(tree.remove_first(), tree)
-    print(tree.remove_first(), tree)
-    print(tree.remove_first(), tree)
-    print(tree.remove_first(), tree)
-    print(tree.remove_first(), tree)
-    print(tree.remove_first(), tree)
-
-    # """ Traversal methods example 1 """
-    # print("\nPDF - traversal methods example 1")
-    # print("---------------------------------")
-    # tree = BST([10, 20, 5, 15, 17, 7, 12])
-    # print(tree.pre_order_traversal())
-    # print(tree.in_order_traversal())
-    # print(tree.post_order_traversal())
-    # print(tree.by_level_traversal())
+    # """ remove() example 4 (gradescope) """
+    # print("\nPDF - method remove() example 4")
+    # print("-------------------------------")
+    # tree = BST([0, 1, 2, 2, 3, 3, 3])
+    # print(tree.remove(0))
+    # print(tree)
+    # print(tree.remove(2))
+    # print(tree)
     #
-    # """ Traversal methods example 2 """
-    # print("\nPDF - traversal methods example 2")
-    # print("---------------------------------")
+    # """ remove() example 5 (gradescope) """
+    # print("\nPDF - method remove() example 5")
+    # print("-------------------------------")
+    # tree = BST([5, -4, -9, -9, -1, -3])
+    # print(tree.remove(-4))
+    # print(tree)
+    #
+    # """ remove() example 6 (gradescope) """
+    # print("\nPDF - method remove() example 6")
+    # print("-------------------------------")
+    # tree = BST(['TG', 'D', 'I', 'W', 'V', 'TG', 'WY'])
+    # print(tree.remove("V"))
+    # print(tree)
+    #
+    # """ remove_first() example 1 """
+    # print("\nPDF - method remove_first() example 1")
+    # print("-------------------------------------")
+    # tree = BST([10, 15, 5])
+    # print(tree.remove_first())
+    # print(tree)
+    #
+    # """ remove_first() example 2 """
+    # print("\nPDF - method remove_first() example 2")
+    # print("-------------------------------------")
+    # tree = BST([10, 20, 5, 15, 17, 7])
+    # print(tree.remove_first())
+    # print(tree)
+    #
+    # """ remove_first() example 3 """
+    # print("\nPDF - method remove_first() example 3")
+    # print("-------------------------------------")
     # tree = BST([10, 10, -1, 5, -1])
-    # print(tree.pre_order_traversal())
-    # print(tree.in_order_traversal())
-    # print(tree.post_order_traversal())
-    # print(tree.by_level_traversal())
+    # print(tree.remove_first(), tree)
+    # print(tree.remove_first(), tree)
+    # print(tree.remove_first(), tree)
+    # print(tree.remove_first(), tree)
+    # print(tree.remove_first(), tree)
+    # print(tree.remove_first(), tree)
+
+    """ Traversal methods example 1 """
+    print("\nPDF - traversal methods example 1")
+    print("---------------------------------")
+    tree = BST([10, 20, 5, 15, 17, 7, 12])
+    print(tree.pre_order_traversal())
+    print(tree.in_order_traversal())
+    print(tree.post_order_traversal())
+    print(tree.by_level_traversal())
+
+    """ Traversal methods example 2 """
+    print("\nPDF - traversal methods example 2")
+    print("---------------------------------")
+    tree = BST([10, 10, -1, 5, -1])
+    print(tree.pre_order_traversal())
+    print(tree.in_order_traversal())
+    print(tree.post_order_traversal())
+    print(tree.by_level_traversal())
     #
     # """ Comprehensive example 1 """
     # print("\nComprehensive example 1")
