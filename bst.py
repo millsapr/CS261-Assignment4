@@ -1,7 +1,7 @@
 # Course: CS261 - Data Structures
-# Student Name:
-# Assignment:
-# Description:
+# Student Name: Ryan Millsap
+# Assignment: 4
+# Description: Implements a binary search tree (BST) class with various methods.
 
 
 class Stack:
