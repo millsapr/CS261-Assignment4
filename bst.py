@@ -400,6 +400,19 @@ class BST:
         returns True if the current tree is a ‘perfect binary tree’. Empty tree is
         considered ‘perfect’. Tree consisting of a single root node is ‘perfect
         """
+        if self.is_full() is False:
+            return False
+
+        h = self.height()
+        total_nodes = 1
+
+        while h > -1:
+            total_nodes = total_nodes * 2
+            h -= 1
+        total_nodes -= 1
+        if self.size() != total_nodes:
+            return False
+
         return True
 
     def size(self) -> int:
