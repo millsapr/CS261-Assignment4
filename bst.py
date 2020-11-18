@@ -199,8 +199,10 @@ class BST:
 
         if self.root.left is None and self.root.right is None:
             self.root = None
+
         elif self.root.right is None:
             self.root = self.root.left
+
         else:
             S = self.root.right
             PS = S
@@ -223,121 +225,70 @@ class BST:
         removes the first instance of the object in the BinaryTree. returns True if the value is
         removed from the BinaryTree and otherwise returns False.
         """
-        if self.contains(value) is False:                   # if value not in tree, return False
-            return False                                    # COME BACK AND CHECK AFTER TRAVERSAL METHODS
-
-        if self.root is None:                               # if tree is empty, return False
-            return False
-
-        if self.root.value == value:
-            self.remove_first()
-            return True
-
-        # find the node to be removed and its parent
-        cur = self.root
-        parent = None         # to fix GS test 'parent' ref'd before assignment
-        while cur is not None:
-            # leftChild = 1                                   # track whether N is parent.left
-            if cur.value == value:
-                target = cur
-                break
-            elif value < cur.value:
-                parent = cur
-                cur = cur.left
-                leftChild = 1
-            else:
-                parent = cur
-                cur = cur.right
-                leftChild = 0                               # N is parent.right
-        print("target is " + str(target))
-        print("parent is " + str(parent))
-        print("target.left is " + str(target.left) + " and " + "target.right is " + str(target.right))
-        # print("leftchild? " + str(leftChild))
-
-        if target.left is None and target.right is None:
-            if leftChild == 1:                              # use leftChild tracking to remove correct child
-                parent.left = None
-            else:
-                parent.right = None
-                print("parent.right is " + str(parent.right))
-        elif target.right is None:                          # N has only a left child
-            if leftChild == 1:
-                parent.left = target.left
-            else:
-                parent.right = target.left
-        else:
-            successor = target.right
-            parentSuccessor = successor
-            nRight = 1                                      # successor is target.right
-            while successor.left is not None:
-                parentSuccessor = successor
-                successor = successor.left
-                nRight = 0
-            successor.left = target.left                    # move target.left subtree to success.left
-            # move successor.right to parentSuccessor.left to replace successor
-            if nRight != 1:
-                parentSuccessor.left = successor.right
-                successor.right = target.right
-            if leftChild == 1:
-                parent.left = successor
-            else:
-                parent.right = successor
-        print("target is " + str(target))
-        target.left = None
-        target.right = None
-
-        return True
-
-        # print("parent.left.value = " + str(parent.left.value))
-        # if N has no children point PN to None
+        # if self.contains(value) is False:                   # if value not in tree, return False
+        #     return False                                    # COME BACK AND CHECK AFTER TRAVERSAL METHODS
+        #
+        # if self.root is None:                               # if tree is empty, return False
+        #     return False
+        #
+        # if self.root.value == value:
+        #     self.remove_first()
+        #     return True
+        #
+        # # find the node to be removed and its parent
+        # cur = self.root
+        # parent = None         # to fix GS test 'parent' ref'd before assignment
+        # while cur is not None:
+        #     # leftChild = 1                                   # track whether N is parent.left
+        #     if cur.value == value:
+        #         target = cur
+        #         break
+        #     elif value < cur.value:
+        #         parent = cur
+        #         cur = cur.left
+        #         leftChild = 1
+        #     else:
+        #         parent = cur
+        #         cur = cur.right
+        #         leftChild = 0                               # N is parent.right
+        # print("target is " + str(target))
+        # print("parent is " + str(parent))
+        # print("target.left is " + str(target.left) + " and " + "target.right is " + str(target.right))
+        # # print("leftchild? " + str(leftChild))
+        #
         # if target.left is None and target.right is None:
-        #     print("no children")
-        #     if parent.left is not None and parent.left.value == target.value:
-        #         print("target is a left child")
+        #     if leftChild == 1:                              # use leftChild tracking to remove correct child
         #         parent.left = None
         #     else:
-        #         print("target is a right child")
         #         parent.right = None
-        # elif target.right is None:
-        #     parent.right = target.left
-        #     print("no target right child so parent right is " + str(parent.right))
-        # else:                                   # find IOS and PS
-        #     # print("parent.left.value = " + str(parent.left.value))
+        #         print("parent.right is " + str(parent.right))
+        # elif target.right is None:                          # N has only a left child
+        #     if leftChild == 1:
+        #         parent.left = target.left
+        #     else:
+        #         parent.right = target.left
+        # else:
         #     successor = target.right
         #     parentSuccessor = successor
-        #     print("succ target.right is " + str(successor))
-        #     nRight = 1
+        #     nRight = 1                                      # successor is target.right
         #     while successor.left is not None:
         #         parentSuccessor = successor
         #         successor = successor.left
         #         nRight = 0
-        #         print("nRight in while = " + str(nRight))
-        #     print("successor is " + str(successor))
-        #     print("nRight after while = " + str(nRight))
-        #     successor.left = target.left
-        #     print("parentSuccessor is " + str(parentSuccessor))
+        #     successor.left = target.left                    # move target.left subtree to success.left
+        #     # move successor.right to parentSuccessor.left to replace successor
         #     if nRight != 1:
-        #         print("nRight!=1")
         #         parentSuccessor.left = successor.right
         #         successor.right = target.right
-        #         successor.left = target.left
-        #         parent.left = successor
-        #         print("parent.left is " + str(parent.left.value))
-        #     elif parent is not None and parent.left is not None and parent.left.value == target.value:
-        #         print("target is a left child")
+        #     if leftChild == 1:
         #         parent.left = successor
         #     else:
-        #         print("target is a right child")
-        #         # print("parent.right before reassign is " + str(parent.right))
-        #         if parent is not None:
-        #             parent.right = successor
-        #         else:
-        #             self.root = successor
-        #         # print("parent.right after reassign is " + str(parent.right))
+        #         parent.right = successor
+        # print("target is " + str(target))
         # target.left = None
         # target.right = None
-        # # find successor (ios)
-        # return True
+
+        return True
 
 
     def pre_order_traversal(self) -> Queue:
