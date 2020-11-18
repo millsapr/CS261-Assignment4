@@ -194,7 +194,7 @@ class BST:
         removes the root node in the BinaryTree. Returns False if the tree is
         empty and there is no root node to remove and True if the root is removed.
         """
-        if self.root is None:                               # if tree is empty, return False
+        if self.root is None:  # if tree is empty, return False
             return False
 
         if self.root.left is None and self.root.right is None:
@@ -202,37 +202,19 @@ class BST:
         elif self.root.right is None:
             self.root = self.root.left
         else:
-            successor = self.root.right
-            parentSuccessor = successor
-            nRight = 1                                     # IF S IS NOT N.RIGHT?
-            while successor.left is not None:
-                parentSuccessor = successor
-                successor = successor.left
+            S = self.root.right
+            PS = S
+            nRight = 1  # IF S IS NOT N.RIGHT?
+            while S.left is not None:
+                PS = S
+                S = S.left
                 nRight = 0
-            print("successor is " + str(successor))
-            successor.left = self.root.left
-
-            if nRight != 1:
-                parentSuccessor.left = successor.right
-                successor.right = self.root.right
-            self.root = successor
-
-        return True
-
-
-            #################
-            # if nRight != 1:
-            #     parentSuccessor.left = successor.right
-            # successor.right = self.root.right
-            # successor.left = self.root.left
-            # self.root = successor
-
-            # elif parent.left.value == self.root.value:
-            #     print("target is a left child")
-            #     parent.left = successor
-            # else:
-            #     print("target is a right child")
-            #     parent.right = successor
+            S.left = self.root.left
+            if nRight == 0:
+                PS.left = S.right
+                S.right = self.root.right
+            S.left = self.root.left
+            self.root = S
 
         return True
 
