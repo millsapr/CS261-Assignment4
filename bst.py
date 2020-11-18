@@ -230,11 +230,6 @@ class BST:
             if cur.value == value:
                 N = cur
                 break
-                # if childleft is None:                     # childleft = None means we're still at root
-                #     self.remove_first()
-                #     return True
-                # else:
-                #     break
             elif value < cur.value:
                 PN = cur
                 cur = cur.left
