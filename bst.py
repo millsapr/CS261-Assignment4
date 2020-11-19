@@ -393,7 +393,33 @@ class BST:
         returns True if the current tree is a ‘complete binary tree’. Empty tree is
         considered complete. Tree consisting of a single root node is complete.
         """
-        return True
+        if self.root is None:                                   # empty tree counts as Complete
+            return True
+
+        two_kids = 1                                            # track whether any given node has two children
+                                                                   # if not, check for children of other nodes on level
+
+        """use a variation on the by_level_traversal to check nodes at each depth """
+        q = Queue()                                             # create queue to track which nodes to check next
+        q.enqueue(self.root)                                    # start with root
+        while q.is_empty() is False:
+            cur = q.dequeue()
+
+            if cur.left is not None:                            # check if node has left child
+                if two_kids == 0:                               # if another node on same level didn't have two children
+                    return False                                    # tree is not complete
+                q.enqueue(cur.left)                             # add left child to queue
+            else:
+                two_kids = 0                                    # if no left child, node is not full, so keep track
+
+            if cur.right is not None:                           # similarly for right child
+                if two_kids == 0:
+                    return False
+                q.enqueue(cur.right)
+            else:
+                two_kids = 0
+                                                                # if whole tree traversed without children on levels
+        return True                                                 # below not full nodes, tree is complete
 
     def is_perfect(self) -> bool:
         """
